@@ -10,7 +10,7 @@ A simple yet powerful Twig implementation for CodeIgniter.
 
 2. Download and unzip this repo and move the files into their respective folders (```application/libraries``` and ```application/config```)
 
-3. Declare (if not) this constants at the end of your *application/constants.php* file:
+3. Define this constants at the end of your *application/constants.php* file:
 
 ```php
 defined('DS')         OR define('DS', DIRECTORY_SEPARATOR);
