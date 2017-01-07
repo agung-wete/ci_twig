@@ -1,5 +1,3 @@
-ci_twig Readme
-
 # Twig library for CodeIgniter 3.X
 
 A simple yet powerful Twig implementation for CodeIgniter.
