@@ -1,3 +1,5 @@
+ci_twig Readme
+
 # Twig library for CodeIgniter 3.X
 
 A simple yet powerful Twig implementation for CodeIgniter.
@@ -36,4 +38,4 @@ $this->twig->render('my_super_template');
 
 You can edit the *application/config/twig.php* file for customize the library behavior.
 
-For more information, please consult the repository Wiki.
+For more information, please consult the repository [wiki](https://github.com/andersonsalas/ci_twig/wiki/).
