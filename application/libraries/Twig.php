@@ -11,28 +11,24 @@
 /**
  * [CLASS/FUNCTION INDEX of SCRIPT]
  *
- *     40 class Twig
- *    124   function __toString()
- *    136   function __construct()
- *    354   function preloadFunctions()
- *    553   function render($template, $vars = NULL, $return = FALSE)
- *    662   function renderPhp($file, $vars)
- *    691   function addGlobal($name, $value)
- *    706   function addDir($dir)
- *    711   function registerFunction($function_name, $callback = NULL, $is_safe = FALSE)
- *    733   function prepDir($dir)
- *    747   function setFileExtension($file_extension)
- *    759   function getFileExtension()
- *    773   function setCurrentTheme($theme)
- *    785   function getCurrentTheme()
+ *     36 class Twig
+ *    126   function __toString()
+ *    138   function __construct()
+ *    240   function registerSettings()
+ *    455   function render($template, $vars = NULL, $return = FALSE)
+ *    571   function renderPhp($file, $vars)
+ *    600   function addGlobal($name, $value)
+ *    615   function addDir($dir)
+ *    620   function registerFunction($function_name, $callback = NULL, $is_safe = FALSE)
+ *    642   function prepDir($dir)
+ *    656   function setFileExtension($file_extension)
+ *    668   function getFileExtension()
+ *    682   function setCurrentTheme($theme)
+ *    694   function getCurrentTheme()
  *
  * TOTAL FUNCTIONS: 13
  *
  */
-
- /*
-  * You MUST have defined this constants in config/constants.php:
-  */
 
 defined('BASEPATH')   OR exit('No direct script access allowed');
 
@@ -60,7 +56,13 @@ class Twig
      */
     protected $twig;
 
-
+    /**
+     *  Twig configuration
+     *
+     * @var $twig_config
+     *
+     * @access protected
+     */
     protected $twig_config;
 
     /**
@@ -692,6 +694,5 @@ class Twig
     {
         return $this->current_theme;
     }
-
 
 }
