@@ -142,7 +142,6 @@ class Twig
          */
 
         # Twit class init and CI instance:
-        Twig_Autoloader::register();
         $this->CI =& get_instance();
 
         # Load twig library config
@@ -162,6 +161,10 @@ class Twig
                 $twig_cache = APPPATH.$twig_config->cache;
             }
             $this->twig_cache = $twig_cache;
+        }
+        else
+        {
+            $this->twig_cache = FALSE;
         }
 
         # Twig file extension:

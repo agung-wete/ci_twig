@@ -48,7 +48,7 @@ $config['enable_call'] = FALSE;
 //     ['another_alias'  => 'another_callback']
 // );
 $config['register'] = array(
-    'route',
+    // ...
 );
 
 // Register simple functions with raw output:
@@ -63,13 +63,13 @@ $config['register'] = array(
 //     ['function_alias' => 'actual_callback']
 // );
 $config['register_safe'] = array(
-
+    // ...
 );
 
 // Register configuration files:
 // It will include them and register as global each config item
 $config['register_config'] = array(
-    'app',
+
 );
 
 // Auto register twig methods
