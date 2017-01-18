@@ -256,7 +256,8 @@ class Twig
                     foreach($lib->_twig_methods as $method)
                     {
                         $function = new Twig_SimpleFunction($method, function() use($lib_name, $method){
-                            return $this->CI->$lib_name->$method();
+                            $args = func_get_args();
+                            return call_user_func_array([$this->CI->$lib_name, $method], $args);
                         });
                         $this->twig->addFunction($function);
                     }
