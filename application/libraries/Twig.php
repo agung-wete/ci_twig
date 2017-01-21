@@ -1,19 +1,19 @@
 <?php
+
 /**
  * Twig library for CodeIgniter
  *
  * @author    Anderson Salas <me@andersonsalas.com.ve>
- * @copyright 2016
+ * @copyright 2017
  * @license   MIT Licence
- * @version   1.0
+ * @version   1.0.0
  */
 
-defined('BASEPATH')   OR exit('No direct script access allowed');
+defined('BASEPATH')
+    OR exit('No direct script access allowed');
 
 class Twig
 {
-    const VERSION = 1.0;
-
 
     /**
      * CodeIgniter instance
@@ -94,16 +94,33 @@ class Twig
 
 
     /**
-     * __toString() magic method
+     * CodeIgniter root path
      *
-     * @return string
+     * @var $rootpath
      *
-     * @access public
+     * @access protected
      */
-    public function __toString()
-    {
-        return 'Twig connector library Version'.self::VERSION.' by Anderson Salas';
-    }
+    protected $rootpath;
+
+
+    /**
+     * CodeIgniter HMVC path
+     *
+     * @var $modulepath
+     *
+     * @access protected
+     */
+    protected $modulepath;
+
+
+    /**
+     * CodeIgniter config path
+     *
+     * @var $configpath
+     *
+     * @access protected
+     */
+    protected $configpath;
 
     /**
      * Class constructor
@@ -114,6 +131,10 @@ class Twig
      */
     public function __construct()
     {
+        $this->rootpath   = dirname(APPPATH).DIRECTORY_SEPARATOR;
+        $this->configpath = APPPATH.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR;
+        $this->modulepath = APPPATH.DIRECTORY_SEPARATOR.'modules'.DIRECTORY_SEPARATOR;
+
         /*
          * Core initialization, environment, cache, variables, etc.
          * -------------------------------------------------------------------------------
@@ -132,7 +153,7 @@ class Twig
         {
             if($twig_config->cache === TRUE)
             {
-                $twig_cache = APPPATH.'cache'.DS.'twig_cache';
+                $twig_cache = APPPATH.'cache'.DIRECTORY_SEPARATOR.'twig_cache';
             }
             else
             {
@@ -186,18 +207,18 @@ class Twig
         {
             foreach($search_folders as $find)
             {
-                if(file_exists( MODULEPATH.$this->CI->router->fetch_module().DS.$find))
+                if(file_exists( $this->modulepath.$this->CI->router->fetch_module().DIRECTORY_SEPARATOR.$find))
                 {
-                    $dirs[] = MODULEPATH.$this->CI->router->fetch_module().DS.$find;
+                    $dirs[] = $this->modulepath.$this->CI->router->fetch_module().DIRECTORY_SEPARATOR.$find;
                 }
             }
         }
 
         foreach($search_folders as $find)
         {
-            if(file_exists(ROOTPATH.'assets'.DS.'themes'.DS.$this->current_theme.DS.$find))
+            if(file_exists($this->rootpath.'assets'.DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR.$this->current_theme.DIRECTORY_SEPARATOR.$find))
             {
-                $dirs[] = ROOTPATH.'assets'.DS.'themes'.DS.$this->current_theme.DS.$find;
+                $dirs[] = $this->rootpath.'assets'.DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR.$this->current_theme.DIRECTORY_SEPARATOR.$find;
             }
         }
 
@@ -416,7 +437,6 @@ class Twig
         };
     }
 
-
     /**
      * Render a template
      *
@@ -435,19 +455,19 @@ class Twig
         $founded    = FALSE;
         $is_php     = FALSE;
         $extensions = [$this->twig_file_extension.'.php', $this->twig_file_extension];
-        $template   = str_ireplace('.',DS,$template);
+        $template   = str_ireplace('.',DIRECTORY_SEPARATOR,$template);
 
         foreach($this->twig->getLoader()->getPaths() as $path)
         {
             foreach($extensions as $extension)
             {
-                $search = $path.DS.$template.$extension;
+                $search = $path.DIRECTORY_SEPARATOR.$template.$extension;
                 if(file_exists($search))
                 {
                     $founded = $search;
 
                     # Check if requested template is a php-hybrid template ( a ".twig.php" file)
-                    $is_php = $path.DS.$template.$this->twig_file_extension.'.php' == $search;
+                    $is_php = $path.DIRECTORY_SEPARATOR.$template.$this->twig_file_extension.'.php' == $search;
                     break;
                 }
             }
