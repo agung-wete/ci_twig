@@ -8,28 +8,6 @@
  * @version   1.0
  */
 
-/**
- * [CLASS/FUNCTION INDEX of SCRIPT]
- *
- *     36 class Twig
- *    126   function __toString()
- *    138   function __construct()
- *    240   function registerSettings()
- *    455   function render($template, $vars = NULL, $return = FALSE)
- *    571   function renderPhp($file, $vars)
- *    600   function addGlobal($name, $value)
- *    615   function addDir($dir)
- *    620   function registerFunction($function_name, $callback = NULL, $is_safe = FALSE)
- *    642   function prepDir($dir)
- *    656   function setFileExtension($file_extension)
- *    668   function getFileExtension()
- *    682   function setCurrentTheme($theme)
- *    694   function getCurrentTheme()
- *
- * TOTAL FUNCTIONS: 13
- *
- */
-
 defined('BASEPATH')   OR exit('No direct script access allowed');
 
 class Twig
@@ -377,11 +355,6 @@ class Twig
             $this->registerFunction('component', function($file) use($asset,$config){
                 return $asset().$config->components_folder.'/'.$file;
             });
-        }
-
-        if(function_exists('route'))
-        {
-            $this->registerFunction('route');
         }
 
         if($twig_config->enable_debug)
