@@ -38,12 +38,12 @@ $config['enable_call'] = FALSE;
 // Register simple (XSS safe) functions:
 //
 // Examples:
-// $config['register_safe'] = array('foo', 'bar');
+// $config['register'] = array('foo', 'bar');
 //
 // You can use 'alias' of your callbacks using an
 // key pair array:
 //
-// $config['register_safe']  = array(
+// $config['register']  = array(
 //     ['function_alias' => 'actual_callback'],
 //     ['another_alias'  => 'another_callback']
 // );

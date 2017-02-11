@@ -122,6 +122,9 @@ class Twig
      */
     protected $configpath;
 
+
+    private $loaded = FALSE;
+
     /**
      * Class constructor
      *
@@ -240,6 +243,9 @@ class Twig
      */
     private function registerSettings()
     {
+        if($this->loaded)
+            return FALSE;
+
         $twig_config =& $this->twig_config;
 
         // Register Twig's external class defined methods:
@@ -254,11 +260,15 @@ class Twig
                 {
                     foreach($lib->_twig_methods as $method)
                     {
-                        $function = new Twig_SimpleFunction($method, function() use($lib_name, $method){
-                            $args = func_get_args();
-                            return call_user_func_array([$this->CI->$lib_name, $method], $args);
-                        });
-                        $this->twig->addFunction($function);
+                        $this->registerFunction($method, [$this->CI->$lib_name, $method]);
+                    }
+                }
+
+                if(isset($lib->_twig_safe_methods) && is_array($lib->_twig_safe_methods))
+                {
+                    foreach($lib->_twig_safe_methods as $method)
+                    {
+                        $this->registerFunction($method, [$this->CI->$lib_name, $method], TRUE); 
                     }
                 }
             }
@@ -435,6 +445,8 @@ class Twig
                 }
             }, TRUE);
         };
+
+        $this->loaded = TRUE;
     }
 
     /**
@@ -547,7 +559,7 @@ class Twig
         }
         catch(Exception $e)
         {
-            show_error($e->getMessage(),500,'Twig exception');
+            show_error($e->getMessage().' in <strong>'.$e->getFile().'</strong> at line '.$e->getLine() ,500,'Twig exception');
         }
     }
 
